@@ -11,48 +11,50 @@ export default function Hero() {
     <section className="relative overflow-hidden">
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
         {/* Left Column - Content */}
-        <div className="flex items-center px-4 sm:px-6 lg:px-8 py-20 lg:py-0">
-          <div className="max-w-xl">
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              {SITE.tagline}
-            </motion.h1>
-
-            <motion.p
-              className="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              {SITE.description}
-            </motion.p>
-
-            <motion.div
-              className="mt-8 flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Button asChild size="lg" className="text-base px-8 py-3">
-                <Link href={SITE.ctas.primary.href}>
-                  {SITE.ctas.primary.label}
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="text-base px-8 py-3"
+        <div className="flex items-center py-20 lg:py-0">
+          <div className="w-full pl-[max(1rem,calc((100vw-80rem)/2+0rem))]">
+            <div className="max-w-xl">
+              <motion.h1
+                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
               >
-                <Link href={SITE.ctas.secondary.href}>
-                  {SITE.ctas.secondary.label}
-                </Link>
-              </Button>
-            </motion.div>
+                {SITE.tagline}
+              </motion.h1>
+
+              <motion.p
+                className="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                {SITE.description}
+              </motion.p>
+
+              <motion.div
+                className="mt-8 flex flex-col sm:flex-row gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Button asChild size="lg" className="text-base px-8 py-3">
+                  <Link href={SITE.ctas.primary.href}>
+                    {SITE.ctas.primary.label}
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="text-base px-8 py-3"
+                >
+                  <Link href={SITE.ctas.secondary.href}>
+                    {SITE.ctas.secondary.label}
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
           </div>
         </div>
 
