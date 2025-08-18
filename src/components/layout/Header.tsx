@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { SITE } from "@/content/site";
-import { Button } from "@/components/ui/button"; // if you added shadcn
-// If you skipped shadcn, replace Button with a <Link> and Tailwind classes
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const nav = [
   { href: "/services", label: "Services" },
@@ -16,7 +16,16 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white/70 backdrop-blur border-b">
       <div className="mx-auto max-w-7xl px-4 h-16 flex items-center justify-between">
         <Link href="/" className="font-semibold">
-          {SITE.name}
+          <Image
+            src="/rtr-logo.png"
+            alt="RTR Technologies - WordPress Development"
+            width={120}
+            height={80}
+            className="object-cover"
+            priority
+            sizes="(max-width: 100px)"
+          />
+          {/* {SITE.name} */}
         </Link>
         <nav className="hidden md:flex gap-6">
           {nav.map((item) => (

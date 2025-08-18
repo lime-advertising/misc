@@ -12,7 +12,7 @@ export default function Hero() {
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="flex items-center py-20 lg:py-0">
-          <div className="w-full pl-[max(1rem,calc((100vw-80rem)/2+0rem))]">
+          <div className="w-full px-4 md:pl-[max(1rem,calc((100vw-80rem)/2+0rem))]">
             <div className="max-w-xl">
               <motion.h1
                 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900"
