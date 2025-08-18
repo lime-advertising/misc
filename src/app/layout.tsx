@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import Script from "next/script";
+import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
 
 const GA_ID = process.env.GA_TRACKING_ID;
@@ -43,7 +44,9 @@ export default function RootLayout({
         `,
               }}
             />
-            <Analytics id={GA_ID} />
+            <Suspense fallback={null}>
+              <Analytics id={GA_ID} />
+            </Suspense>
           </>
         )}
         {children}
