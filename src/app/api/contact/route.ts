@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: process.env.RESEND_FROM!,
       to: [process.env.CONTACT_TO!],
-      reply_to: email,
+      replyTo: email,
       subject: `New Inquiry from ${name}`,
       text: `From: ${name} <${email}>\n\n${message}`,
     });
