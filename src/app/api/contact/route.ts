@@ -5,15 +5,37 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const { name, email, message, recaptchaToken } = await req.json();
 
     if (
       typeof name !== "string" ||
       typeof email !== "string" ||
-      typeof message !== "string"
+      typeof message !== "string" ||
+      typeof recaptchaToken !== "string"
     ) {
       return NextResponse.json(
         { ok: false, error: "Invalid fields" },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA
+    const recaptchaResponse = await fetch(
+      "https://www.google.com/recaptcha/api/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
+      }
+    );
+
+    const recaptchaResult = await recaptchaResponse.json();
+
+    if (!recaptchaResult.success) {
+      return NextResponse.json(
+        { ok: false, error: "reCAPTCHA verification failed" },
         { status: 400 }
       );
     }

@@ -1,25 +1,40 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import Header from "@/components/layout/Header";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
 
+    // Get reCAPTCHA token
+    const recaptchaToken = recaptchaRef.current?.getValue();
+    if (!recaptchaToken) {
+      setStatus("error");
+      return;
+    }
+
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
+    // Add reCAPTCHA token to the data
+    const submitData = {
+      ...data,
+      recaptchaToken,
+    };
+
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify(submitData),
     });
 
     if (res.ok) {
@@ -27,8 +42,12 @@ export default function ContactPage() {
       if (form) {
         form.reset();
       }
+      // Reset reCAPTCHA
+      recaptchaRef.current?.reset();
     } else {
       setStatus("error");
+      // Reset reCAPTCHA on error
+      recaptchaRef.current?.reset();
     }
   }
 
@@ -63,6 +82,12 @@ export default function ContactPage() {
               required
               className="w-full rounded-md border px-4 py-2"
             />
+
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+            />
+
             <button
               className="rounded-md bg-black px-5 py-2 text-white disabled:opacity-60"
               disabled={status === "sending"}
