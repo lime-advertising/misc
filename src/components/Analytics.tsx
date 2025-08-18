@@ -9,7 +9,7 @@ export default function Analytics({ id }: { id?: string }) {
 
   useEffect(() => {
     if (!id) return;
-    // @ts-ignore
+    // @ts-expect-error - gtag is loaded externally via Google Analytics script
     window.gtag?.("config", id, {
       page_path: pathname + (search?.toString() ? `?${search}` : ""),
     });
