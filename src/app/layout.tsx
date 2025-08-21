@@ -4,6 +4,8 @@ import { DM_Sans } from "next/font/google";
 import Script from "next/script";
 import { Suspense } from "react";
 import Analytics from "@/components/Analytics";
+import Footer from "@/components/layout/Footer";
+import PageTransition from "@/components/PageTransition";
 
 const GA_ID = process.env.GA_TRACKING_ID;
 
@@ -25,8 +27,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={dmSans.variable}>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
+    <html lang="en" className={`${dmSans.variable} dark`}>
+      <body className="min-h-screen bg-background text-foreground antialiased">
         {GA_ID && (
           <>
             <Script
@@ -49,7 +51,8 @@ export default function RootLayout({
             </Suspense>
           </>
         )}
-        {children}
+        <PageTransition>{children}</PageTransition>
+        <Footer />
       </body>
     </html>
   );

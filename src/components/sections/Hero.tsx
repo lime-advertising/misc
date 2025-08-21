@@ -5,17 +5,37 @@ import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/content/site";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
+      {/* Brand gradient background accents */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+      >
+        <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-25"
+             style={{
+               background:
+                 "radial-gradient(closest-side, var(--brand-gold-start), transparent 70%)",
+             }}
+        />
+        <div className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full blur-3xl opacity-20"
+             style={{
+               background:
+                 "radial-gradient(closest-side, var(--brand-silver-start), transparent 70%)",
+             }}
+        />
+      </div>
       <div className="grid lg:grid-cols-2 min-h-[80vh]">
         {/* Left Column - Content */}
         <div className="flex items-center py-20 lg:py-0">
           <div className="w-full px-4 md:pl-[max(1rem,calc((100vw-80rem)/2+0rem))]">
             <div className="max-w-xl">
+              <Badge variant="gold">{SITE.name}</Badge>
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900"
+                className="mt-3 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
@@ -24,7 +44,7 @@ export default function Hero() {
               </motion.h1>
 
               <motion.p
-                className="mt-6 text-lg lg:text-xl text-gray-600 leading-relaxed"
+                className="mt-6 text-lg lg:text-xl text-muted-foreground leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -70,7 +90,7 @@ export default function Hero() {
               src="/hero-image.webp"
               alt="RTR Technologies - WordPress Development"
               fill
-              className="object-cover"
+              className="object-cover will-change-transform"
               priority
               sizes="(max-width: 1024px) 100vw, 50vw"
             />

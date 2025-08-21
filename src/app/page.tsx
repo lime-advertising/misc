@@ -4,7 +4,8 @@ import About from "@/components/sections/About";
 import Services from "@/components/sections/Services";
 import Portfolio from "@/components/sections/Portfolio";
 import Testimonials from "@/components/sections/Testimonials";
-import ContactTeaser from "@/components/sections/ContactTeaser";
+import FeaturedCaseStudy from "@/components/sections/FeaturedCaseStudy";
+import FAQ from "@/components/sections/FAQ";
 
 export const metadata = {
   title: "RTR Technologies – WordPress Growth Partner",
@@ -33,9 +34,10 @@ export default function HomePage() {
       <Hero />
       <About />
       <Services />
+      <FeaturedCaseStudy />
       <Portfolio />
       <Testimonials />
-      <ContactTeaser />
+      <FAQ />
     </>
   );
 }
